@@ -1,73 +1,26 @@
-# Welcome to your Lovable project
+# Vision 32 – Web Dashboard
 
-## Project info
+This directory contains the web-based control and monitoring dashboard
+for the Vision 32 embedded image processing system.
 
-**URL**: https://lovable.dev/projects/a5fa6e41-a875-44b5-bf67-37aba6e59a0a
+## Overview
+The dashboard provides real-time visualization and control of the ESP32-S3
+based image processing unit. It communicates with the device over Wi-Fi
+using HTTP endpoints.
 
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/a5fa6e41-a875-44b5-bf67-37aba6e59a0a) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
+## Tech Stack
 - Vite
-- TypeScript
 - React
-- shadcn-ui
+- TypeScript
 - Tailwind CSS
+- shadcn-ui
 
-## How can I deploy this project?
+## Features
+- Live video streaming
+- Camera parameter control
+- System metrics monitoring (Heap, RSSI)
 
-Simply open [Lovable](https://lovable.dev/projects/a5fa6e41-a875-44b5-bf67-37aba6e59a0a) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Run Locally
+```bash
+npm install
+npm run dev
