@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Dark Neon Purple Vision-32 Theme */
+    --background: 248 65% 8%;
+    --background-end: 248 55% 14%;
+    --foreground: 0 0% 95%;
+
+    --card: 248 50% 12%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 248 50% 12%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 263 83% 68%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 263 83% 68%;
+
+    --secondary: 248 45% 18%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 248 45% 18%;
+    --muted-foreground: 220 13% 65%;
+
+    --accent: 195 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    --accent-glow: 195 100% 50%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 248 45% 25%;
+    --input: 248 45% 20%;
+    --ring: 263 83% 68%;
+
+    --radius: 1rem;
+
+    --sidebar-background: 248 60% 10%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 263 83% 68%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 248 45% 18%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 248 45% 25%;
+    --sidebar-ring: 263 83% 68%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply text-foreground;
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--background-end)) 100%);
+    background-attachment: fixed;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-card/40 backdrop-blur-xl border border-primary/20;
+    box-shadow: 0 8px 32px 0 rgba(123, 92, 255, 0.15);
+  }
+  
+  .glass-card-hover {
+    @apply glass-card hover:border-primary/40 transition-all duration-300;
+    box-shadow: 0 8px 32px 0 rgba(123, 92, 255, 0.15);
+  }
+  
+  .glass-card-hover:hover {
+    box-shadow: 0 8px 48px 0 rgba(123, 92, 255, 0.3);
+  }
+  
+  .neon-glow {
+    box-shadow: 0 0 20px rgba(123, 92, 255, 0.5), 0 0 40px rgba(123, 92, 255, 0.3);
+  }
+  
+  .neon-glow-accent {
+    box-shadow: 0 0 20px rgba(0, 184, 255, 0.5), 0 0 40px rgba(0, 184, 255, 0.3);
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .border-glow {
+    border: 1px solid hsl(var(--primary) / 0.3);
+    box-shadow: 0 0 15px rgba(123, 92, 255, 0.3);
+  }
+  
+  .border-glow-accent {
+    border: 1px solid hsl(var(--accent) / 0.3);
+    box-shadow: 0 0 15px rgba(0, 184, 255, 0.3);
+  }
+}

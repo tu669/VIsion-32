@@ -1,47 +1,73 @@
-📷 Vision 32 – Embedded Edge Image Processing System
+# Welcome to your Lovable project
 
-Vision 32 is a high-performance embedded vision platform developed using the ESP32-S3 microcontroller. The project focuses on performing real-time image capture and processing at the edge, eliminating heavy reliance on cloud-based computation and reducing latency, bandwidth usage, and system complexity.
+## Project info
 
-The system captures image data from a camera sensor, processes it locally using optimized firmware, and delivers output through a dual-interface architecture:
+**URL**: https://lovable.dev/projects/a5fa6e41-a875-44b5-bf67-37aba6e59a0a
 
-A local TFT display for standalone real-time visualization
+## How can I edit this code?
 
-A web-based dashboard for remote monitoring and control over Wi-Fi
+There are several ways of editing your application.
 
-✨ Key Features
+**Use Lovable**
 
-ESP32-S3 based embedded image processing
+Simply visit the [Lovable Project](https://lovable.dev/projects/a5fa6e41-a875-44b5-bf67-37aba6e59a0a) and start prompting.
 
-DMA-based image capture with PSRAM frame buffering
+Changes made via Lovable will be committed automatically to this repo.
 
-Real-time grayscale image processing
+**Use your preferred IDE**
 
-Asynchronous web server with live video streaming
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-HTML5 dashboard with system monitoring (Heap, RSSI)
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-Stable 24-hour continuous operation
+Follow these steps:
 
-🛠️ Technologies Used
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
 
-ESP32-S3
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
 
-C++ (ESP-IDF + Arduino framework)
+# Step 3: Install the necessary dependencies.
+npm i
 
-OV2640 Camera Module
+# Step 4: Start the development server with auto-reloading and an instant preview.
+npm run dev
+```
 
-SPI TFT Display
+**Edit a file directly in GitHub**
 
-HTML, CSS, JavaScript (Web Dashboard)
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-🏆 Recognition
+**Use GitHub Codespaces**
 
-This project secured 3rd Place at the Mini Project Exhibition 2025, evaluated among 50+ teams, and was recognized for its innovation and system integration.
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-🚀 Future Scope
+## What technologies are used for this project?
 
-Edge AI integration using ESP-WHO
+This project is built with:
 
-Power optimization using deep sleep & PIR sensors
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
 
-Custom 3D-printed enclosure for industrial deployment
+## How can I deploy this project?
+
+Simply open [Lovable](https://lovable.dev/projects/a5fa6e41-a875-44b5-bf67-37aba6e59a0a) and click on Share -> Publish.
+
+## Can I connect a custom domain to my Lovable project?
+
+Yes, you can!
+
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
