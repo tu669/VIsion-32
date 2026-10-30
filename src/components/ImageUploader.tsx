@@ -25,17 +25,17 @@ const ImageUploader = ({ onImageUpload, imageData }: ImageUploaderProps) => {
   };
 
   return (
-    <div className="glass-card rounded-2xl p-6">
+    <div className="bg-card rounded-xl p-6 shadow-sm border border-border">
       <label
         htmlFor="image-upload"
-        className="flex flex-col items-center justify-center gap-3 cursor-pointer hover:border-primary/60 hover:bg-primary/5 transition-all duration-300 rounded-xl p-8 border-2 border-dashed border-primary/40"
+        className="flex flex-col items-center justify-center gap-3 cursor-pointer hover:bg-secondary/50 transition-colors rounded-lg p-8 border-2 border-dashed border-border"
       >
-        <Upload className="w-12 h-12 text-primary" />
+        <Upload className="w-12 h-12 text-muted-foreground" />
         <div className="text-center">
           <p className="text-sm font-medium text-foreground">
             Click to upload an image
           </p>
-          <p className="text-xs text-foreground/60 mt-1">
+          <p className="text-xs text-muted-foreground mt-1">
             PNG, JPG, WEBP up to 10MB
           </p>
         </div>
@@ -49,20 +49,20 @@ const ImageUploader = ({ onImageUpload, imageData }: ImageUploaderProps) => {
       </label>
 
       {imageData && (
-        <div className="mt-4 p-4 glass-card rounded-xl">
-          <h3 className="text-sm font-bold text-gradient mb-2">
+        <div className="mt-4 p-4 bg-secondary/50 rounded-lg">
+          <h3 className="text-sm font-medium text-foreground mb-2">
             Image Details
           </h3>
-          <div className="space-y-1 text-xs text-foreground/70">
+          <div className="space-y-1 text-xs text-muted-foreground">
             <p>
-              <span className="font-medium text-primary">Name:</span> {imageData.name}
+              <span className="font-medium">Name:</span> {imageData.name}
             </p>
             <p>
-              <span className="font-medium text-primary">Size:</span>{' '}
+              <span className="font-medium">Size:</span>{' '}
               {formatFileSize(imageData.size)}
             </p>
             <p>
-              <span className="font-medium text-primary">Dimensions:</span> {imageData.width} x{' '}
+              <span className="font-medium">Dimensions:</span> {imageData.width} x{' '}
               {imageData.height}
             </p>
           </div>

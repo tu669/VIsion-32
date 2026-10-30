@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from "react";
 
 // Web Serial API type declarations
 interface SerialPort {
@@ -18,55 +18,48 @@ declare global {
   }
 }
 
-interface ConsoleLog {
+export interface ConsoleLog {
   timestamp: string;
   message: string;
 }
 
-interface UseEsp32SerialReturn {
-  connectSerial: () => Promise<void>;
-  disconnectSerial: () => Promise<void>;
-  isConnected: boolean;
-  currentMode: number;
-  setMode: (mode: number) => Promise<void>;
-  updateParam: (param: string, value: string | number) => Promise<void>;
-  consoleLogs: ConsoleLog[];
-  clearConsole: () => void;
-  isSupported: boolean;
-}
-
-const modeNames = [
-  'Normal',
-  'Grayscale',
-  'Black & White',
-  'Saturation',
-  'Brightness',
-  'Enhance',
-  'Segment',
-  'Edge Detect'
+// EXPORT MODE NAMES so ESP32Control.tsx can use them
+export const modeNames = [
+  "Normal",
+  "Grayscale",
+  "Black & White",
+  "Saturation",
+  "Brightness",
+  "Enhance",
+  "Segment",
+  "Edge Detect",
 ];
 
-export const useEsp32Serial = (): UseEsp32SerialReturn => {
+export const useEsp32Serial = () => {
   const [isConnected, setIsConnected] = useState(false);
-  const [currentMode, setCurrentMode] = useState(5); // Default to Enhance
+  const [currentMode, setCurrentMode] = useState(0);
   const [consoleLogs, setConsoleLogs] = useState<ConsoleLog[]>([]);
-  const [isSupported] = useState(() => 'serial' in navigator);
+  const [isSupported] = useState(() => "serial" in navigator);
 
   const portRef = useRef<SerialPort | null>(null);
-  const writerRef = useRef<WritableStreamDefaultWriter<Uint8Array> | null>(null);
-  const readerRef = useRef<ReadableStreamDefaultReader<Uint8Array> | null>(null);
+  const writerRef =
+    useRef<WritableStreamDefaultWriter<Uint8Array> | null>(null);
+  const readerRef =
+    useRef<ReadableStreamDefaultReader<Uint8Array> | null>(null);
+
   const isReadingRef = useRef(false);
 
   const addLog = (message: string) => {
     const timestamp = new Date().toLocaleTimeString();
-    setConsoleLogs(prev => [...prev, { timestamp, message }]);
+    setConsoleLogs((prev) => [...prev, { timestamp, message }]);
   };
 
+  // Read incoming ESP32 serial messages
   const readSerialData = async () => {
     if (!readerRef.current || isReadingRef.current) return;
-    
+
     isReadingRef.current = true;
-    
+
     try {
       while (true) {
         const { value, done } = await readerRef.current.read();
@@ -74,43 +67,41 @@ export const useEsp32Serial = (): UseEsp32SerialReturn => {
           readerRef.current.releaseLock();
           break;
         }
-        
+
         const text = new TextDecoder().decode(value);
-        addLog(`ESP32: ${text}`);
+        addLog(text);
       }
-    } catch (error) {
-      console.error('Read error:', error);
-      addLog(`Read error: ${error}`);
+    } catch (err) {
+      addLog("Read error: " + err);
       setIsConnected(false);
       isReadingRef.current = false;
     }
   };
 
+  // Connect to ESP32
   const connectSerial = async () => {
     if (!isSupported) {
-      alert('Web Serial API not supported. Please use Chrome, Edge, or Opera browser.');
+      alert("Web Serial API not supported.");
       return;
     }
 
     try {
       portRef.current = await navigator.serial.requestPort();
       await portRef.current.open({ baudRate: 115200 });
-      
+
       writerRef.current = portRef.current.writable.getWriter();
       readerRef.current = portRef.current.readable.getReader();
-      
+
       setIsConnected(true);
-      addLog('Connected to ESP32');
-      
+      addLog("Connected to ESP32");
+
       readSerialData();
-      
-    } catch (error) {
-      console.error('Connection error:', error);
-      addLog(`Connection error: ${error}`);
-      alert('Failed to connect. Make sure you selected the correct port!');
+    } catch (err) {
+      addLog("Connection error: " + err);
     }
   };
 
+  // Disconnect ESP32
   const disconnectSerial = async () => {
     try {
       isReadingRef.current = false;
@@ -132,62 +123,47 @@ export const useEsp32Serial = (): UseEsp32SerialReturn => {
       }
 
       setIsConnected(false);
-      addLog('Disconnected from ESP32');
-    } catch (error) {
-      console.error('Disconnect error:', error);
-      addLog(`Disconnect error: ${error}`);
+      addLog("Disconnected from ESP32");
+    } catch (err) {
+      addLog("Disconnect error: " + err);
     }
   };
 
+  // Send MODE:x
   const setMode = async (mode: number) => {
-    if (!isConnected) {
-      alert('Please connect to ESP32 first!');
-      return;
-    }
-    
-    if (!writerRef.current) {
-      addLog('Writer not available');
-      return;
-    }
-    
+    if (!isConnected) return;
+
     try {
       const command = `MODE:${mode}\n`;
-      const encoder = new TextEncoder();
-      await writerRef.current.write(encoder.encode(command));
-      
+      await writerRef.current?.write(new TextEncoder().encode(command));
+
       setCurrentMode(mode);
-      addLog(`Mode changed to: ${modeNames[mode]}`);
-      
-    } catch (error) {
-      console.error('Error sending command:', error);
-      addLog(`Error sending command: ${error}`);
+      addLog("Mode → " + modeNames[mode]);
+    } catch (err) {
+      addLog("Error setting mode: " + err);
     }
   };
 
-  const updateParam = async (param: string, value: string | number) => {
+  // Send PARAM:name:value
+  const updateParam = async (param: string, value: number) => {
     if (!isConnected) return;
-    
-    if (!writerRef.current) {
-      addLog('Writer not available');
-      return;
-    }
-    
+
     try {
       const command = `PARAM:${param}:${value}\n`;
-      const encoder = new TextEncoder();
-      await writerRef.current.write(encoder.encode(command));
-      addLog(`Parameter ${param} set to ${value}`);
-    } catch (error) {
-      console.error('Error sending parameter:', error);
-      addLog(`Error sending parameter: ${error}`);
+      await writerRef.current?.write(new TextEncoder().encode(command));
+      addLog(`Param ${param} = ${value}`);
+    } catch (err) {
+      addLog("Error sending parameter: " + err);
     }
   };
 
-  const clearConsole = () => {
-    setConsoleLogs([]);
-  };
+  const clearConsole = () => setConsoleLogs([]);
 
-  // Cleanup on unmount
+  // ALIASES for React UI compatibility
+  const connect = connectSerial;
+  const sendParam = updateParam;
+  const logs = consoleLogs;
+
   useEffect(() => {
     return () => {
       disconnectSerial();
@@ -195,14 +171,23 @@ export const useEsp32Serial = (): UseEsp32SerialReturn => {
   }, []);
 
   return {
+    // original
     connectSerial,
     disconnectSerial,
-    isConnected,
-    currentMode,
-    setMode,
     updateParam,
     consoleLogs,
+
+    // React UI friendly aliases
+    connect,
+    sendParam,
+    logs,
+
+    // shared
+    isConnected,
+    isSupported,
+    currentMode,
+    setMode,
     clearConsole,
-    isSupported
+    modeNames,
   };
 };

@@ -6,9 +6,9 @@ interface OriginalCanvasProps {
 
 const OriginalCanvas = ({ canvasRef }: OriginalCanvasProps) => {
   return (
-    <div className="glass-card rounded-2xl p-6">
-      <h3 className="text-lg font-bold text-gradient mb-4">Original Image</h3>
-      <div className="bg-card/20 rounded-xl overflow-hidden flex items-center justify-center min-h-[300px] border-glow">
+    <div className="bg-card rounded-xl p-6 shadow-sm border border-border">
+      <h3 className="text-sm font-semibold text-foreground mb-4">Original Image</h3>
+      <div className="bg-secondary/30 rounded-lg overflow-hidden flex items-center justify-center min-h-[300px]">
         <canvas
           ref={canvasRef}
           className="max-w-full h-auto"

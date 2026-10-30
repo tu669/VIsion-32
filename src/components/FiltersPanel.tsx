@@ -1,13 +1,6 @@
 import { Button } from '@/components/ui/button';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
-import { ChevronDown } from 'lucide-react';
 import { FilterType, FilterSettings } from '@/hooks/useImageProcessing';
 import Slider from './Slider';
-import { useState } from 'react';
 
 interface FiltersPanelProps {
   activeFilter: FilterType | null;
@@ -36,17 +29,9 @@ const FiltersPanel = ({
   filterSettings,
   onSettingsChange,
 }: FiltersPanelProps) => {
-  const [isOpen, setIsOpen] = useState(true);
-
   return (
-    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-      <div className="glass-card rounded-2xl p-6">
-        <CollapsibleTrigger className="flex items-center justify-between w-full mb-4 hover:text-primary transition-colors">
-          <h2 className="text-xl font-bold text-gradient">Filters</h2>
-          <ChevronDown className={`h-5 w-5 text-primary transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-        </CollapsibleTrigger>
-        
-        <CollapsibleContent>
+    <div className="bg-card rounded-xl p-6 shadow-sm border border-border">
+      <h2 className="text-lg font-semibold text-foreground mb-4">Filters</h2>
       
       <div className="grid grid-cols-3 gap-2 mb-6">
         {filters.map((filter) => (
@@ -147,9 +132,7 @@ const FiltersPanel = ({
           )}
         </div>
       )}
-        </CollapsibleContent>
-      </div>
-    </Collapsible>
+    </div>
   );
 };
 

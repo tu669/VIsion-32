@@ -1,36 +1,36 @@
 import { Button } from '@/components/ui/button';
 
 interface ModeTabsProps {
-  activeMode: 'filters' | 'rgb';
-  onModeChange: (mode: 'filters' | 'rgb') => void;
+  activeMode: 'filters' | 'rgb' | 'esp32';
+  onModeChange: (mode: 'filters' | 'rgb' | 'esp32') => void;
 }
 
 const ModeTabs = ({ activeMode, onModeChange }: ModeTabsProps) => {
   return (
-    <div className="flex gap-3">
+    <div className="flex gap-2 p-1 bg-secondary rounded-lg w-fit">
       <Button
-        variant={activeMode === 'filters' ? 'default' : 'outline'}
+        variant={activeMode === 'filters' ? 'default' : 'ghost'}
         size="lg"
         onClick={() => onModeChange('filters')}
-        className={`min-w-[140px] transition-all duration-300 rounded-xl ${
-          activeMode === 'filters'
-            ? 'bg-primary text-primary-foreground animate-pulse-glow'
-            : 'glass-card hover:border-primary/60'
-        }`}
+        className="min-w-[140px] transition-all"
       >
         Filters Mode
       </Button>
       <Button
-        variant={activeMode === 'rgb' ? 'default' : 'outline'}
+        variant={activeMode === 'rgb' ? 'default' : 'ghost'}
         size="lg"
         onClick={() => onModeChange('rgb')}
-        className={`min-w-[140px] transition-all duration-300 rounded-xl ${
-          activeMode === 'rgb'
-            ? 'bg-primary text-primary-foreground animate-pulse-glow'
-            : 'glass-card hover:border-primary/60'
-        }`}
+        className="min-w-[140px] transition-all"
       >
         RGB Mode
+      </Button>
+      <Button
+        variant={activeMode === 'esp32' ? 'default' : 'ghost'}
+        size="lg"
+        onClick={() => onModeChange('esp32')}
+        className="min-w-[140px] transition-all"
+      >
+        ESP32 Control Mode
       </Button>
     </div>
   );

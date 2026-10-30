@@ -18,12 +18,10 @@ export default {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
-        "background-end": "hsl(var(--background-end))",
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
-          glow: "hsl(var(--primary-glow))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -40,7 +38,6 @@ export default {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
-          glow: "hsl(var(--accent-glow))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -83,28 +80,10 @@ export default {
             height: "0",
           },
         },
-        "pulse-glow": {
-          "0%, 100%": {
-            boxShadow: "0 0 20px rgba(123, 92, 255, 0.4), 0 0 40px rgba(123, 92, 255, 0.2)",
-          },
-          "50%": {
-            boxShadow: "0 0 30px rgba(123, 92, 255, 0.6), 0 0 60px rgba(123, 92, 255, 0.3)",
-          },
-        },
-        "pulse-glow-accent": {
-          "0%, 100%": {
-            boxShadow: "0 0 20px rgba(0, 184, 255, 0.4), 0 0 40px rgba(0, 184, 255, 0.2)",
-          },
-          "50%": {
-            boxShadow: "0 0 30px rgba(0, 184, 255, 0.6), 0 0 60px rgba(0, 184, 255, 0.3)",
-          },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
-        "pulse-glow-accent": "pulse-glow-accent 2s ease-in-out infinite",
       },
     },
   },
